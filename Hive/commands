@@ -1,0 +1,44 @@
+-- local file system LFS
+mkdir mans
+mkdir mans/srcdata
+-- Put department.csv in srcdata directory via FileZila
+ls mans/srcdata
+-- HDFS 
+hadoop fs -ls
+hadoop fs -mkdir /tmp/hivedata
+hadoop fs -ls /tmp
+hadoop fs -put mans/srcdata/department.csv /tmp/hivedata
+hadoop fs -ls /tmp/hivedata
+-- hive
+create database db
+use db
+create table dept_local
+    > ( deptid int,
+    > deptname string,
+    > managerid int,
+    > salary int)
+    > row format delimited
+    > fields terminated by ',';
+create table dept_hdfs
+    > ( deptid int,
+    > deptname string,
+    > managerid int,
+    > salary int)
+    > row format delimited
+    > fields terminated by ',';
+
+load data local inpath 'file:///home/cloudera/mans/srcdata/department.csv' into table dept_local;
+load data local inpath '/tmp/hivedata/' into table dept_hdfs;
+
+ create external table dept_ext
+    > (deptid int,
+    > deptname string,
+    > managerid int,
+    > salary int)
+    > row format delimited
+    > fields terminated by ','
+    > location '/tmp/hivedata/';
+
+
+
+
