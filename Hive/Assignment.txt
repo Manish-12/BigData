@@ -20,3 +20,10 @@ d. In which quarter sales was minimum
 e. In which country sales was maximum and in which country sales was minimum
 f. Calculate quartelry sales for each city
 h. Find a month for each year in which maximum number of quantities were sold
+
+
+
+
+
+
+
